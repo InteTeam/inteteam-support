@@ -39,3 +39,11 @@ OOR-HQ is the control plane for the Vintage Internet Project (VIP). It lets fami
 - [31 - Deploying Games](31-deploy-games.md) — "Deploy to my VIP" button
 - [32 - Uploading Games](32-upload-games.md) — Upload JS/HTML games, auto-scanner
 - [33 - High Scores](33-high-scores.md) — Company scores, global leaderboard
+
+### Project Sharing
+- [40 - Project Sharing Overview](40-project-sharing-overview.md) — What it is, roles, relationship to board invites
+- [41 - Sending an Email Invite](41-sending-email-invite.md) — Invite a specific person by email
+- [42 - Generating a Team Link](42-generating-team-link.md) — Multi-use shareable link
+- [43 - Accepting a Project Invite](43-accepting-project-invite.md) — How invitees join a project
+- [44 - Viewing Shared Projects](44-shared-projects.md) — "Shared with me" tab on Projects index
+- [45 - Managing Project Members](45-managing-project-members.md) — Revoke invites, remove members, change roles
