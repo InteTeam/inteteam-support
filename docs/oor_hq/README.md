@@ -47,3 +47,10 @@ OOR-HQ is the control plane for the Vintage Internet Project (VIP). It lets fami
 - [43 - Accepting a Project Invite](43-accepting-project-invite.md) — How invitees join a project
 - [44 - Viewing Shared Projects](44-shared-projects.md) — "Shared with me" tab on Projects index
 - [45 - Managing Project Members](45-managing-project-members.md) — Revoke invites, remove members, change roles
+
+### Project Archive & Lifecycle
+- [50 - Filtering Projects by Status](50-project-status-filter.md) — Status dropdown: All Active, Completed, On Hold, Archived
+- [51 - Archiving a Project](51-archiving-a-project.md) — Archive vs delete, what members see, how to archive
+- [52 - Restoring a Project](52-restoring-a-project.md) — Bring an archived project back to active
+- [53 - Permanently Deleting a Project](53-permanently-deleting-a-project.md) — Two-step permanent delete, admin-only
+- [54 - Searching Mindmaps and Notes](54-searching-mindmaps-and-notes.md) — Search + pagination in Mindmaps and Notes tabs
