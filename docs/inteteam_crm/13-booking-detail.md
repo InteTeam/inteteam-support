@@ -83,7 +83,8 @@ Each entry shows the timestamp and who made the change.
 The three-dot menu in the header gives you:
 
 - **Edit Customer Details** — update name, email, phone
-- **Send WhatsApp** — message the customer (if configured and they have a phone number)
+- **View WhatsApp Chat** — opens the linked WhatsApp conversation for this booking (appears once a conversation has been linked)
+- **Send WhatsApp** — send a template message to start a new conversation (requires WhatsApp configured and customer phone number on file)
 - **Send SMS** — text the customer
 - **Move Back** — return to previous stage (with reason)
 - **Cancel Booking** — cancel with reason

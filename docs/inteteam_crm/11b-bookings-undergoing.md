@@ -25,7 +25,7 @@ Click the **three-dot menu** on any row to:
 - **Complete** — move the booking to the Completed stage
 - **Move Back** — return to Incoming (requires a reason)
 - **Cancel** — cancel the booking (requires a reason)
-- **Send WhatsApp** — open a WhatsApp message composer (only visible if WhatsApp is configured)
+- **Send WhatsApp** — open a WhatsApp message composer (only visible if WhatsApp is configured and the customer has a phone number)
 - **Send SMS** — open an SMS composer (only visible if ClickSend is configured)
 - **View History** — see the full audit log of changes
 
