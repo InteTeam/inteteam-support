@@ -1,0 +1,41 @@
+{
+    "compilerOptions": {
+        "target": "ES2022",
+        "useDefineForClassFields": true,
+        "lib": ["ES2022", "DOM", "DOM.Iterable"],
+        "module": "ESNext",
+        "skipLibCheck": true,
+
+        /* Bundler mode */
+        "moduleResolution": "bundler",
+        "allowImportingTsExtensions": true,
+        "resolveJsonModule": true,
+        "isolatedModules": true,
+        "noEmit": true,
+        "jsx": "react-jsx",
+
+        /* Linting */
+        "strict": true,
+        "noUnusedLocals": true,
+        "noUnusedParameters": true,
+        "noFallthroughCasesInSwitch": true,
+
+        /* Paths */
+        "baseUrl": ".",
+        "paths": {
+            "@/*": ["resources/js/*"]
+        }
+    },
+    "include": ["resources/js/**/*.ts", "resources/js/**/*.tsx"],
+    "exclude": [
+        "resources/js/Pages/Admin/Gallery/**/*",
+        "resources/js/Pages/Manager/Gallery/**/*",
+        "resources/js/Components/Molecules/MediaGridItem.tsx",
+        "resources/js/Components/Molecules/MediaUploadZone.tsx",
+        "resources/js/Components/Organisms/GalleryDataTable.tsx",
+        "resources/js/Components/Organisms/GalleryMediaGrid.tsx",
+        "resources/js/Components/Organisms/MediaLibraryPanel.tsx",
+        "resources/js/Components/Organisms/MediaUploadModal.tsx"
+    ],
+    "references": [{ "path": "./tsconfig.node.json" }]
+}

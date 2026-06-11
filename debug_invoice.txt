@@ -1,0 +1,44 @@
+Array
+(
+    [company_id] => 01kc1zctefkqnkkedzkmsgzag3
+    [created_by] => 1
+    [invoice_number] => INV-00001
+    [invoice_date] => 2025-12-09T00:00:00.000000Z
+    [due_date] => 2025-12-23T00:00:00.000000Z
+    [status] => draft
+    [notes] => Test invoice
+    [customer_type] => private
+    [customer_name] => John Doe
+    [customer_email] => 
+    [customer_phone] => 
+    [customer_address_line1] => 
+    [customer_address_line2] => 
+    [customer_city] => 
+    [customer_postcode] => 
+    [customer_country] => United Kingdom
+    [id] => 01kc1zctfggn1e2xynwd81t8gv
+    [updated_at] => 2025-12-09T16:33:59.000000Z
+    [created_at] => 2025-12-09T16:33:59.000000Z
+    [subtotal] => 250.00
+    [vat_rate] => 20.00
+    [vat_amount] => 50.00
+    [total_amount] => 300.00
+    [company] => Array
+        (
+            [id] => 01kc1zctefkqnkkedzkmsgzag3
+            [name] => Quitzon LLC
+            [slug] => quitzon-llc-515
+            [settings] => Array
+                (
+                    [default_currency] => GBP
+                    [timezone] => Europe/London
+                    [low_stock_threshold] => 10
+                )
+
+            [is_active] => 1
+            [created_at] => 2025-12-09T16:33:59.000000Z
+            [updated_at] => 2025-12-09T16:33:59.000000Z
+            [deleted_at] => 
+        )
+
+)

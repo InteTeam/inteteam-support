@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form Embed Test</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        .debug {
+            background: #fff;
+            border: 1px solid #ddd;
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+        }
+        .debug button {
+            background: #3b82f6;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .debug pre {
+            background: #f5f5f5;
+            padding: 10px;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+    </style>
+</head>
+<body>
+    <h1>Form Embed Test</h1>
+    
+    <div class="debug">
+        <h3>API Connection Test</h3>
+        <button onclick="testAPI()">Test API Connection</button>
+        <pre id="api-result">Click button to test...</pre>
+    </div>
+    
+    <!-- Form will appear here -->
+    <div id="form-be59b3d0-b884-4170-8034-1be2d04aafd4"></div>
+    
+    <script>
+        async function testAPI() {
+            const result = document.getElementById('api-result');
+            result.textContent = 'Testing...';
+            
+            try {
+                const response = await fetch('http://127.0.0.1:8000/api/forms/be59b3d0-b884-4170-8034-1be2d04aafd4');
+                const data = await response.json();
+                result.textContent = JSON.stringify(data, null, 2);
+            } catch (error) {
+                result.textContent = 'ERROR: ' + error.message;
+            }
+        }
+    </script>
+    
+    <script src="http://127.0.0.1:8000/js/form-embed.js"></script>
+    <script>
+      FormEmbed.render('be59b3d0-b884-4170-8034-1be2d04aafd4', {
+        container: '#form-be59b3d0-b884-4170-8034-1be2d04aafd4',
+        apiBase: 'http://127.0.0.1:8000',  // IMPORTANT: Specify API base URL
+        theme: 'light',
+        onSuccess: function(data) {
+            alert('Form submitted successfully!');
+            console.log('Success:', data);
+        },
+        onError: function(error) {
+            alert('Form submission failed!');
+            console.error('Error:', error);
+        }
+      });
+    </script>
+</body>
+</html>

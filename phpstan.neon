@@ -1,0 +1,32 @@
+includes:
+    - vendor/larastan/larastan/extension.neon
+    - phpstan-baseline.neon
+
+parameters:
+    paths:
+        - app
+        - config
+        - database
+        - routes
+    
+    # Set analysis level (0-9, higher is stricter)
+    level: 5
+    
+    # Exclude patterns
+    excludePaths:
+        - */cache/*
+        - */node_modules/*
+        - */vendor/*
+        - */storage/*
+        - */bootstrap/cache/*
+    
+    # Ignore specific errors (optional)
+    ignoreErrors:
+        # Ignore mixed types from third-party packages
+        - '#Call to an undefined method Illuminate\\.*#'
+        - '#Access to an undefined property Illuminate\\.*#'
+    
+    # Enable parallel processing
+    parallel:
+        maximumNumberOfProcesses: 4
+        processTimeout: 300.0

@@ -1,0 +1,115 @@
+parameters:
+	ignoreErrors:
+		-
+			message: '#^Parameter \#1 \$callback of method Illuminate\\Database\\Eloquent\\Collection\<int,Illuminate\\Database\\Eloquent\\Model\>\:\:map\(\) contains unresolvable type\.$#'
+			identifier: argument.unresolvableType
+			count: 1
+			path: app/Http/Controllers/CompanyController.php
+
+		-
+			message: '#^Parameter \#1 \$companyId of method App\\Models\\User\:\:belongsToCompany\(\) expects string, int given\.$#'
+			identifier: argument.type
+			count: 1
+			path: app/Http/Controllers/CompanyController.php
+
+		-
+			message: '#^Parameter \#1 \$callback of method Illuminate\\Database\\Eloquent\\Collection\<int,Illuminate\\Database\\Eloquent\\Model\>\:\:map\(\) contains unresolvable type\.$#'
+			identifier: argument.unresolvableType
+			count: 1
+			path: app/Http/Controllers/CompanyUserController.php
+
+		-
+			message: '#^Cannot access property \$id on object\|string\.$#'
+			identifier: property.nonObject
+			count: 2
+			path: app/Http/Requests/Company/InviteUserRequest.php
+
+		-
+			message: '#^Using nullsafe property access "\?\-\>id" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 1
+			path: app/Http/Requests/Company/UpdateCompanyRequest.php
+
+		-
+			message: '#^Method App\\Models\\Company\:\:defaultWarehouse\(\) should return App\\Models\\Warehouse\|null but returns Illuminate\\Database\\Eloquent\\Model\|null\.$#'
+			identifier: return.type
+			count: 1
+			path: app/Models/Company.php
+
+		-
+			message: '#^Cannot call method isPast\(\) on string\.$#'
+			identifier: method.nonObject
+			count: 1
+			path: app/Models/CompanyUser.php
+
+		-
+			message: '#^Method App\\Models\\InventoryItem\:\:latestMovement\(\) should return App\\Models\\StockMovement\|null but returns Illuminate\\Database\\Eloquent\\Model\|null\.$#'
+			identifier: return.type
+			count: 1
+			path: app/Models/InventoryItem.php
+
+		-
+			message: '#^Property App\\Models\\StockMovement\:\:\$created_at \(string\) does not accept Illuminate\\Support\\Carbon\.$#'
+			identifier: assign.propertyType
+			count: 1
+			path: app/Models/StockMovement.php
+
+		-
+			message: '#^Method App\\Models\\User\:\:currentCompany\(\) should return App\\Models\\Company\|null but returns \(Illuminate\\Database\\Eloquent\\Model&object\{pivot\: Illuminate\\Database\\Eloquent\\Relations\\Pivot\}\)\|null\.$#'
+			identifier: return.type
+			count: 1
+			path: app/Models/User.php
+
+		-
+			message: '#^Method App\\Models\\User\:\:currentCompany\(\) should return App\\Models\\Company\|null but returns Illuminate\\Database\\Eloquent\\Collection\<int, Illuminate\\Database\\Eloquent\\Model\>\|\(Illuminate\\Database\\Eloquent\\Model&object\{pivot\: Illuminate\\Database\\Eloquent\\Relations\\Pivot\}\)\|null\.$#'
+			identifier: return.type
+			count: 1
+			path: app/Models/User.php
+
+		-
+			message: '#^Using nullsafe property access "\?\-\>name" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 1
+			path: app/Models/User.php
+
+		-
+			message: '#^Parameter \#1 \$companyId of method App\\Models\\User\:\:belongsToCompany\(\) expects string, int given\.$#'
+			identifier: argument.type
+			count: 2
+			path: app/Policies/CompanyPolicy.php
+
+		-
+			message: '#^Access to an undefined property App\\Models\\InventoryItem\:\:\$category\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Services/InventoryService.php
+
+		-
+			message: '#^PHPDoc type class\-string\<Illuminate\\Database\\Eloquent\\Model\> of property Database\\Factories\\CompanyFactory\:\:\$model is not covariant with PHPDoc type class\-string\<App\\Models\\Company\> of overridden property Illuminate\\Database\\Eloquent\\Factories\\Factory\<App\\Models\\Company\>\:\:\$model\.$#'
+			identifier: property.phpDocType
+			count: 1
+			path: database/factories/CompanyFactory.php
+
+		-
+			message: '#^PHPDoc type class\-string\<Illuminate\\Database\\Eloquent\\Model\> of property Database\\Factories\\InventoryItemFactory\:\:\$model is not covariant with PHPDoc type class\-string\<App\\Models\\InventoryItem\> of overridden property Illuminate\\Database\\Eloquent\\Factories\\Factory\<App\\Models\\InventoryItem\>\:\:\$model\.$#'
+			identifier: property.phpDocType
+			count: 1
+			path: database/factories/InventoryItemFactory.php
+
+		-
+			message: '#^PHPDoc type class\-string\<Illuminate\\Database\\Eloquent\\Model\> of property Database\\Factories\\ProfileFactory\:\:\$model is not covariant with PHPDoc type class\-string\<App\\Models\\Profile\> of overridden property Illuminate\\Database\\Eloquent\\Factories\\Factory\<App\\Models\\Profile\>\:\:\$model\.$#'
+			identifier: property.phpDocType
+			count: 1
+			path: database/factories/ProfileFactory.php
+
+		-
+			message: '#^PHPDoc type class\-string\<Illuminate\\Database\\Eloquent\\Model\> of property Database\\Factories\\RoleFactory\:\:\$model is not covariant with PHPDoc type class\-string\<App\\Models\\Role\> of overridden property Illuminate\\Database\\Eloquent\\Factories\\Factory\<App\\Models\\Role\>\:\:\$model\.$#'
+			identifier: property.phpDocType
+			count: 1
+			path: database/factories/RoleFactory.php
+
+		-
+			message: '#^PHPDoc type class\-string\<Illuminate\\Database\\Eloquent\\Model\> of property Database\\Factories\\WarehouseFactory\:\:\$model is not covariant with PHPDoc type class\-string\<App\\Models\\Warehouse\> of overridden property Illuminate\\Database\\Eloquent\\Factories\\Factory\<App\\Models\\Warehouse\>\:\:\$model\.$#'
+			identifier: property.phpDocType
+			count: 1
+			path: database/factories/WarehouseFactory.php
