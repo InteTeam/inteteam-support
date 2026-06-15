@@ -33,8 +33,8 @@ class HandleInertiaRequests extends Middleware
                     : null,
             ],
             'flash' => fn () => [
-                'alert'  => $request->session()->get('flash.alert'),
-                'type'   => $request->session()->get('flash.type'),
+                'alert'  => $request->session()->get('alert'),
+                'type'   => $request->session()->get('type'),
                 'status' => $request->session()->get('status'),
             ],
         ]);

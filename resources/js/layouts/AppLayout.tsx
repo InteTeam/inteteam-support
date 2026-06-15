@@ -1,6 +1,11 @@
 import { Link, usePage } from '@inertiajs/react';
 import { ReactNode } from 'react';
 
+interface FlashProps {
+    alert?: string;
+    type?: string;
+}
+
 interface NavItem {
     label: string;
     href: string;
@@ -26,7 +31,7 @@ const customerNav: NavItem[] = [
 ];
 
 export default function AppLayout({ children, title }: { children: ReactNode; title?: string }) {
-    const { auth } = usePage<{ auth: { user: { name: string; role: string } | null } }>().props;
+    const { auth, flash } = usePage<{ auth: { user: { name: string; role: string } | null }; flash: FlashProps }>().props;
     const role = auth?.user?.role ?? '';
 
     const nav =
@@ -69,6 +74,11 @@ export default function AppLayout({ children, title }: { children: ReactNode; ti
             <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
                 {title && (
                     <h1 className="text-2xl font-bold text-gray-900 mb-6">{title}</h1>
+                )}
+                {flash?.alert && (
+                    <div className={`mb-6 rounded-md px-4 py-3 text-sm border ${flash.type === 'success' ? 'bg-green-50 border-green-200 text-green-800' : 'bg-blue-50 border-blue-200 text-blue-800'}`}>
+                        {flash.alert}
+                    </div>
                 )}
                 {children}
             </main>

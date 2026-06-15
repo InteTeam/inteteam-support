@@ -69,8 +69,10 @@ class SsoController extends Controller
             $user = $this->findOrCreateUser($claims, 'engineer');
             Auth::login($user, false);
             $request->session()->regenerate();
+            $this->storeSsoTokens($request, $tokens);
 
-            return redirect()->route('engineer.dashboard');
+            return redirect()->route('engineer.dashboard')
+                ->with(['alert' => 'Signed in via SSO.', 'type' => 'success']);
         }
 
         // tenant_admin → tenant portal
@@ -78,13 +80,15 @@ class SsoController extends Controller
             $user = $this->findOrCreateUser($claims, 'tenant_admin');
             Auth::login($user, false);
             $request->session()->regenerate();
+            $this->storeSsoTokens($request, $tokens);
 
             $tenantId = $claims['tenant_id'] ?? null;
             if ($tenantId) {
                 $request->session()->put('current_tenant_id', $tenantId);
             }
 
-            return redirect()->route('tenant.dashboard');
+            return redirect()->route('tenant.dashboard')
+                ->with(['alert' => 'Signed in via SSO.', 'type' => 'success']);
         }
 
         // end_customer → customer view
@@ -99,12 +103,22 @@ class SsoController extends Controller
 
             Auth::login($user, false);
             $request->session()->regenerate();
+            $this->storeSsoTokens($request, $tokens);
 
-            return redirect()->route('customer.dashboard');
+            return redirect()->route('customer.dashboard')
+                ->with(['alert' => 'Signed in via SSO.', 'type' => 'success']);
         }
 
         return redirect()->route('login')
             ->withErrors(['sso' => 'Unrecognised role: ' . $ssoRole]);
+    }
+
+    /** @param array{access_token: string, refresh_token?: string, expires_in?: int} $tokens */
+    private function storeSsoTokens(Request $request, array $tokens): void
+    {
+        $request->session()->put('sso_access_token', $tokens['access_token']);
+        $request->session()->put('sso_refresh_token', $tokens['refresh_token'] ?? null);
+        $request->session()->put('sso_token_expires_at', now()->addSeconds((int) ($tokens['expires_in'] ?? 3600))->timestamp);
     }
 
     /** @param array{email: string, name: string} $claims */

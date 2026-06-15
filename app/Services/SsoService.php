@@ -76,4 +76,21 @@ class SsoService
 
         return $response->json();
     }
+
+    /** @return array{access_token: string, refresh_token: string, expires_in: int} */
+    public function refreshToken(string $refreshToken): array
+    {
+        $response = Http::asForm()->post($this->ssoInternalUrl . '/oauth/token', [
+            'grant_type'    => 'refresh_token',
+            'refresh_token' => $refreshToken,
+            'client_id'     => $this->clientId,
+            'client_secret' => $this->clientSecret,
+        ]);
+
+        if (! $response->successful()) {
+            throw new RuntimeException('SSO token refresh failed: ' . $response->body());
+        }
+
+        return $response->json();
+    }
 }
