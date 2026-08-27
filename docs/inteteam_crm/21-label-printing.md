@@ -81,6 +81,10 @@ In **Settings -> Printing -> Labels tab**, choose a style:
 - **Barcode label** — the barcode graphic plus your chosen fields. Choose whether the barcode sits at the **Top** or **Bottom** of the label.
 - **Text only** — just the fields, no barcode graphic at all (useful for small labels where a scannable barcode isn't needed)
 
+Next to the style choice, set **Text alignment** to **Left** or **Center** — this controls how all label text (fields and custom text) lines up on the label.
+
+If a line of text is too long to fit the label width, it now wraps onto an extra line instead of being cut off.
+
 ### Choosing Content Fields
 
 1. Go to **Settings -> Printing -> Labels tab**

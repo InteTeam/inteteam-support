@@ -52,6 +52,22 @@ Use the **search box** at the top to find products by name.
 
 ---
 
+## Custom Fields
+
+Add extra key/value data to a product beyond the standard fields (e.g. "Colour", "Material", "Voltage").
+
+1. On the Add/Edit Product form, find **Custom Fields (optional)**
+2. Click **+ Add** to add a key/value row
+3. Type a field name — a dropdown suggests names already used elsewhere in your company's product catalogue, so you can stay consistent
+4. Fill in the value, or leave it blank to skip that field for this product
+5. Click the **remove** button on a row to delete it
+
+When editing a product, rows for any custom field already used elsewhere in your company appear automatically (blank, ready to fill in) alongside this product's existing values. Blank rows are dropped when you save — they don't create empty fields.
+
+Custom fields are included as extra columns when you export products, and unmapped columns during import are saved as custom fields too (see [Importing Products](#importing-products)).
+
+---
+
 ## Stock Adjustments
 
 To adjust stock on a product:
