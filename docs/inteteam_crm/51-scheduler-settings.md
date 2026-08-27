@@ -66,3 +66,20 @@ Holidays appear on the calendar and block scheduling for that day.
 You can create:
 - **Company-wide holidays** — apply to all locations (e.g. Christmas, New Year)
 - **Location-specific holidays** — only affect one location (e.g. local events)
+
+---
+
+## Scheduler Config (Concurrency & Buffer)
+
+Control how many bookings can share a time slot, and add breathing room between appointments — per location.
+
+**Settings -> Scheduler -> Scheduler Config**, or navigate to `/admin/scheduler/settings/config/{location}`
+
+1. Select a **location**
+2. Set **Max Concurrent Bookings** — how many bookings can share a single time slot. Set to **0** to temporarily close the location to new bookings without touching business hours
+3. Toggle **Buffer Between Bookings** on to reserve time after each booking before the next slot opens, then set the buffer in minutes
+4. Click **Save**
+
+Leaving the buffer toggle off (or Max Concurrent Bookings unset) keeps the previous default behaviour — nothing changes for a location until you actively configure it here.
+
+**Known gap:** the buffer only applies to the live availability check made when a booking is actually created — a slot that a buffer has just closed off can still briefly show as available in a pre-calculated slot listing until the next scheduled slot recalculation runs. The booking itself is still protected either way; this only affects what shows as available for a short window.

@@ -13,7 +13,16 @@
 
 1. Open the booking or use the row action menu
 2. Click **Complete**
-3. The booking moves immediately to Completed
+3. If your Completed stage has custom statuses set up, a **Mark as Completed** dialog lets you pick which one applies (e.g. "Collected", "Ready for pickup") — the one marked default is pre-selected. If there are no custom statuses, you'll just see a confirmation.
+4. Click **Mark as Completed**
+
+### Incoming -> Completed (Skip)
+
+Quick jobs that don't need to sit in Undergoing can skip straight to Completed:
+
+1. On the **Incoming** bookings list, open the **three-dot menu** on the row
+2. Click **Skip to Completed**
+3. Confirm the completed status, same as above
 
 ---
 
@@ -44,7 +53,7 @@ The reason is recorded in the booking history so your team knows why it was move
 4. Enter a **reason for cancellation** (required, up to 500 characters)
 5. Click **Cancel Booking** (red button)
 
-Cancelled bookings are soft-deleted — they won't appear in your lists but the data is preserved.
+Cancelled bookings move to the **Completed** list with a **Cancelled** status — they stay visible and findable (filter the Completed list by the Cancelled status), rather than disappearing. Nothing is deleted; the cancellation reason is recorded as a note on the booking.
 
 ---
 

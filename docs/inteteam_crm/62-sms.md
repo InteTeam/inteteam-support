@@ -4,6 +4,8 @@ Send text messages to customers via ClickSend.
 
 **Navigate to:** `/admin/sms`
 
+ClickSend is one of two possible SMS providers — the other is your own [InteBox device](62b-intebox-sms.md), if you have one paired. Whichever is set as the **Active SMS Provider** in Settings handles all outbound texts; the Conversations and Send SMS screens work identically either way.
+
 ---
 
 ## Setup
@@ -55,3 +57,23 @@ You can also send SMS from a booking:
 1. Open a booking detail page
 2. Click the **three-dot menu**
 3. Click **Send SMS**
+4. If your company has any SMS templates set up, you'll first be asked to pick one or send **plain text** instead
+5. Picking a template fills in known details automatically (customer name, phone, booking reference, company name, today's date) and asks you to fill in anything else the template needs
+6. Preview the final message, then click **Send**
+
+### SMS Templates
+
+Create reusable, company-authored SMS templates so staff don't retype the same message:
+
+1. Go to **Settings -> SMS Templates**
+2. Click **New Template**, give it a name and body text
+3. Use `{{placeholder}}` tokens in the body — `{{customer_name}}`, `{{customer_phone}}`, `{{booking_ref}}`, `{{company_name}}`, and `{{today_date}}` auto-fill when sent from a booking; any other `{{...}}` becomes a field staff fill in by hand
+4. Save
+
+There's no default wording built into the CRM — templates are entirely up to you.
+
+---
+
+## If a Customer Stops Receiving Texts
+
+If a customer has ever replied **STOP** or **UNSUBSCRIBE** to any text from you, the CRM automatically and permanently blocks further SMS to that number — this is a legal (UK PECR) requirement and staff cannot override it. See [InteBox SMS Bridge](62b-intebox-sms.md#compliance-stop-word-opt-out) for details.

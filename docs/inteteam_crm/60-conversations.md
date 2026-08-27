@@ -1,6 +1,6 @@
 # Conversations
 
-A unified inbox for all customer messaging — WhatsApp and SMS in one place.
+A unified inbox for all customer messaging — WhatsApp, SMS, and customer portal support tickets in one place.
 
 **Conversations** in the top navigation, or navigate to `/admin/conversations`
 
@@ -21,8 +21,8 @@ On mobile, you see the list first. Tap a conversation to open the message thread
 
 At the top of the conversation list:
 
-- **Channel tabs** — filter by All, WhatsApp, or SMS
-- **Status tabs** — switch between Active and Archived conversations
+- **Channel tabs** — filter by All, WhatsApp, SMS, or Tickets
+- **Status tabs** — switch between Active and Archived conversations (Tickets use Open/Closed instead — see [Support Tickets](64-support-tickets.md))
 - **Search** — search by customer name or phone number
 
 ---
@@ -36,6 +36,7 @@ Click **New WA** (WhatsApp) or **New SMS** at the top right to start a new conve
 ## Requirements
 
 - **WhatsApp:** WhatsApp Business API must be configured in Settings (see [WhatsApp Setup](61-whatsapp.md))
-- **SMS:** ClickSend must be configured in Settings (see [SMS Setup](62-sms.md))
+- **SMS:** ClickSend or an [InteBox device](62b-intebox-sms.md) must be configured in Settings (see [SMS Setup](62-sms.md))
+- **Tickets:** the customer portal must be enabled — tickets are always started by the customer, not staff (see [Support Tickets](64-support-tickets.md))
 
-If neither is configured, the Conversations page will be empty. Set up at least one channel first.
+If none of these are configured, the Conversations page will be empty. Set up at least one channel first.

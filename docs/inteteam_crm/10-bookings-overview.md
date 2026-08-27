@@ -50,6 +50,8 @@ At the top of every booking list (Incoming, Undergoing, Completed):
 
 Filters work together — you can combine status + assignee + search to narrow down exactly what you need. On mobile, these stack vertically below the page title.
 
+Below the table, pagination controls include **First** and **Last** page buttons alongside Previous/Next — useful for jumping straight to the oldest or newest bookings in a long list.
+
 ### Row Actions
 
 Click the **three-dot menu** on any booking row for quick actions:

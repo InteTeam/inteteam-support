@@ -74,7 +74,7 @@ If your email was set up via the InteTeam Panel, these fields are filled in auto
 | **Drop-off receipt** | Confirmation to customer when item received at a drop-off point (opt-in, custom message) |
 | **Invoice sent** | Invoice PDF attached |
 | **Password reset** | Reset link |
-| **Team invitation** | Invitation link to join your company |
+| **Team invitation** | Invitation link to join your company — sent via InteTeam's own system mailer automatically if you haven't configured Resend or SMTP yet, so new team members can always be invited even before email is set up |
 | **Payment confirmation** | Confirmation after successful payment |
 | **Storefront order** | Order confirmation with items and total |
 
@@ -90,6 +90,29 @@ If your email was set up via the InteTeam Panel, these fields are filled in auto
 6. Save
 
 These template settings apply regardless of which provider is active.
+
+---
+
+## Sending a Templated Email from a Booking
+
+Separate from the automatic booking-confirmation email above, staff can send a one-off email from any booking:
+
+1. Open a booking detail page
+2. Click the **three-dot menu**, then **Send Email**
+3. If your company has any email templates set up, pick one or choose **plain text**
+4. Picking a template fills in known details automatically (customer name, company name, date) and asks you to fill in anything else the template needs
+5. Preview the rendered email, then click **Send**
+
+### Email Templates (booking messages)
+
+Create reusable, company-authored email templates for the "Send Email" action above — separate from the single confirmation template under "Customising Email Content":
+
+1. Go to **Settings -> Email Templates**
+2. Click **New Template**, give it a name, subject, and body
+3. Use `{{placeholder}}` tokens in the body — customer/company/date details auto-fill when sent from a booking; any other `{{...}}` becomes a field staff fill in by hand
+4. Save
+
+There's no default wording built in — templates are entirely up to you, and the backend re-validates the rendered email before sending so a template can never leave a literal `{{...}}` in a customer's inbox.
 
 ---
 

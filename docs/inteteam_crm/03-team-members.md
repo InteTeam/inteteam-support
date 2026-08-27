@@ -28,7 +28,7 @@ Use the **search box** to find users by name or email (type at least 3 character
    - **Role** — choose from the dropdown (see Roles below)
 3. Click **Send Invitation**
 
-The system sends an invitation email. The user has **7 days** to accept it. Until they do, their status shows as **Pending** (yellow).
+The system sends an invitation email. The user has **7 days** to accept it. Until they do, their status shows as **Pending** (yellow). Invitation emails always send — even if you haven't set up [email](63-email.md) for your company yet, InteTeam's own mailer handles this one automatically.
 
 Once they click the link in the email, their status changes to **Active** (green) and they can log in.
 

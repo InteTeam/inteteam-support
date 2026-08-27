@@ -40,6 +40,8 @@ Scheduled appointments linked to this booking:
 
 - Each visit shows: visit number, type (one-time/recurring), status, date, time, location, assigned agent
 - Click **Add Visit** to schedule a new appointment
+- Set the **start time** and the **end time** auto-fills using the location's default appointment length — or click a **30 / 60 / 90 / 120 min** preset button to set the duration directly. Editing the end time by hand stops the auto-fill until you change the start time, location, or a preset again
+- If the slot falls outside business hours or is otherwise unavailable, you'll get a validation error with an option to override it
 
 ### Tasks Tab
 
@@ -57,6 +59,8 @@ Checklist of work to be done:
 Internal notes visible only to your team:
 
 - Type in the text area and submit to add a note
+- **Admins** see a visibility dropdown next to the text box: **Visible to everyone** (default) or **Admins only** — non-admin team members can only add general notes and won't see this option
+- Notes marked Admins only show an **"Admins only"** badge and are hidden from non-admin team members entirely
 - Notes show who wrote them and when
 - Newest notes appear first
 - Notes include which stage the booking was in when the note was added

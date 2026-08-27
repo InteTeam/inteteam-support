@@ -16,6 +16,8 @@ For example, the **Undergoing** stage might have:
 - "Repairing" (green)
 - "Ready for collection" (purple)
 
+Every company's **Completed** stage has a built-in **Cancelled** status — this is what [cancelling a booking](12-bookings-stages.md) uses to keep cancelled jobs visible instead of deleting them.
+
 ---
 
 ## Creating a Status

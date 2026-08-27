@@ -19,16 +19,25 @@ The **Print Label** button appears on these pages:
 
 ## How to Print
 
+If your company has **no label presets** configured, printing is still one click:
+
 1. Open the booking, order, part, or inventory item page
 2. Click the **Print Label** button (printer icon)
 3. The CRM creates a print job and sends it to your default printer
-4. Your label printer prints the barcode
 
-That's it. The label is printed on your configured printer within a few seconds.
+If your company **has label presets** set up (see [Printer Setup](22-printer-setup.md)), clicking Print Label opens a **print dialog** instead:
+
+1. Click the **Print Label** button
+2. If you have more than one preset, choose the **Label Preset** from the dropdown — its dimensions (e.g. 76x51mm) are shown next to the name
+3. Review the **label lines** — these are pre-filled automatically from the item's data (name, price, manufacturer, etc. depending on what fields the preset shows). Edit any line or type into an empty one before printing
+4. Set the number of **copies**
+5. Click **Print**
+
+**Switching preset mid-print:** if you change the preset from the one you last used, a confirmation dialog asks "Have you loaded the correct label roll?" before applying the change — this exists to stop you accidentally printing a large label's worth of text onto a small roll (or vice versa). Your most recently used preset per company is remembered in your browser and pre-selected next time.
 
 ### Printing Multiple Copies
 
-The default is 1 copy. If you need multiples, the Print Label button supports setting the number of copies (configurable in code — contact your admin if you need batch printing).
+Set the number of copies directly in the print dialog (1-100). If you don't see a dialog (no presets configured), the default is 1 copy — ask your admin to set up a label preset if you need to choose copies per print.
 
 ---
 
@@ -62,17 +71,24 @@ Use the **search box** to filter by prefix, or the **status dropdown** to filter
 ## What's on the Label
 
 - A **barcode** (CODE_128 format by default) encoding the reference/SKU/MPN
-- Optionally, **human-readable text** below the barcode showing the value in plain text
-- Optionally, the **company name** below the ID
+- Up to **4 content fields** of your choice — barcode text, company name, product name, manufacturer/artist, category, price, or description (plus any custom "spec" fields from your product data)
 - Optionally, up to **3 lines of custom text** (set per batch when creating label batches)
 
-To configure what appears on labels:
-1. Go to **Settings -> Hardware tab -> Printing**
-2. Find the **Label Options** card
-3. **Show ID on label** — toggle to show/hide the human-readable text (e.g. "BK-001234")
-4. **Show company name** — toggle to show/hide the company name on the label. Useful when multiple businesses share a printer or stock area.
+### Label Style
 
-These apply to all labels printed by your company. Custom text is set per batch during batch creation.
+In **Settings -> Printing -> Labels tab**, choose a style:
+
+- **Barcode label** — the barcode graphic plus your chosen fields. Choose whether the barcode sits at the **Top** or **Bottom** of the label.
+- **Text only** — just the fields, no barcode graphic at all (useful for small labels where a scannable barcode isn't needed)
+
+### Choosing Content Fields
+
+1. Go to **Settings -> Printing -> Labels tab**
+2. In the **Label Content** card, toggle up to 4 fields on (the limit scales with your label preset's size — larger presets allow more)
+3. Use the **up/down arrow buttons** on each row to reorder — the top enabled field prints closest to the barcode
+4. Click **Save Label Content**
+
+These field/style settings apply to all presets unless a specific preset has its own field configuration set separately (see [Printer Setup](22-printer-setup.md) for managing presets). Batch custom text (set during batch creation) still appears in addition to these fields.
 
 ---
 

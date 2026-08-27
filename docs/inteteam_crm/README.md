@@ -4,7 +4,7 @@
 
 User-facing documentation for the InteTeam CRM Admin role. Admins have full access to everything — this is the most comprehensive manual and the first one to write. Other role manuals (Technician, Warehouse) are subsets of this.
 
-**Status:** 34 guides written (2026-03-28). Screenshots still needed.
+**Status:** 42 guides written (2026-08-26). Screenshots still needed.
 
 ---
 
@@ -48,10 +48,13 @@ User-facing documentation for the InteTeam CRM Admin role. Admins have full acce
 - [51 - Scheduler Settings](51-scheduler-settings.md) — Locations, hours, holidays
 
 ### 7. Communication
-- [60 - Conversations](60-conversations.md) — Unified inbox
+- [60 - Conversations](60-conversations.md) — Unified inbox (WhatsApp, SMS, Tickets)
 - [61 - WhatsApp](61-whatsapp.md) — WhatsApp messaging
 - [62 - SMS](62-sms.md) — ClickSend SMS
+- [62b - InteBox SMS Bridge](62b-intebox-sms.md) — SMS via your own InteBox device
 - [63 - Email](63-email.md) — Email notifications
+- [64 - Support Tickets](64-support-tickets.md) — Customer portal support tickets
+- [65 - Voice Calling](65-voice-calling.md) — Twilio phone calls
 
 ### 8. Invoicing & Payments
 - [70 - Invoicing](70-invoicing.md) — Create, send, void, credit notes
@@ -68,6 +71,10 @@ User-facing documentation for the InteTeam CRM Admin role. Admins have full acce
 
 ### 11. Reports
 - [95 - Reports](95-reports.md) — Financial reports, export
+
+### 12. Integrations
+- [81 - Company Webhooks](81-company-webhooks.md) — HTTP POST on task completion
+- [82 - Google Reviews](82-google-reviews.md) — Connect your Google Business Profile
 
 ---
 

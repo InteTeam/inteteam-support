@@ -65,3 +65,7 @@ When you're ready to start work:
 3. Click **Move to Undergoing**
 
 The booking moves to the Undergoing list.
+
+### Skipping Straight to Completed
+
+For quick jobs that don't need an Undergoing stage, use **Skip to Completed** from the three-dot menu on the row instead of moving to Undergoing first — see [Moving Through Stages](12-bookings-stages.md#incoming---completed-skip).

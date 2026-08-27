@@ -123,7 +123,7 @@ On any invoice detail page:
 
 ## Invoice Settings
 
-**Business -> Invoices -> Settings**, or navigate to `/admin/invoices/settings`
+**Business -> Invoices -> Settings**, or navigate to `/admin/invoice-settings`
 
 Configure defaults that apply to all invoices:
 
@@ -137,3 +137,14 @@ Configure defaults that apply to all invoices:
 | **Bank Details** | Bank name, sort code, account number, account name |
 | **Payment Terms** | Default text shown on invoices |
 | **Default Notes** | Default notes text |
+
+### Header & Footer Images
+
+Add your logo or letterhead to generated invoice PDFs:
+
+1. On the same settings page, scroll to **Header Image** / **Footer Image**
+2. Upload a JPEG, PNG, or WebP file (max 5MB) for either or both
+3. The image appears at the top/bottom of every invoice PDF from then on
+4. Click **Remove** next to an image to clear it
+
+Uploading is optional — invoices render fine without either image.

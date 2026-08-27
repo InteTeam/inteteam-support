@@ -66,6 +66,6 @@ Changes apply immediately — the embed code stays the same.
 
 ## Custom Form Builder
 
-The actual form fields are built in **Business -> CMS -> Forms**. That's where you design what questions customers answer (text fields, dropdowns, checkboxes, etc.). The booking form links to one of these CMS forms.
+The actual form fields are built in **Business -> CMS -> Forms**. That's where you design what questions customers answer (text fields, dropdowns, checkboxes, etc.), including reordering fields. The booking form links to one of these CMS forms.
 
 See [CMS Forms](91-cms-forms.md) for how to build custom forms.

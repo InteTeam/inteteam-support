@@ -19,6 +19,7 @@ View all your forms with name, status, and submission count.
    - Text inputs, text areas, dropdowns, checkboxes, radio buttons
    - Set fields as required or optional
    - Add placeholder text and help text
+   - Use the **up/down arrow buttons** on each field to reorder it without deleting and recreating it
 3. Name your form and save
 
 ---

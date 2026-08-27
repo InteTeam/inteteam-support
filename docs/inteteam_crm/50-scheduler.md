@@ -41,6 +41,7 @@ Click the **eye icon** to hide/show customer surnames on the calendar (useful wh
    - Visit type (one-time or recurring)
    - Location
    - Assigned agent
+   - **Service Address** (admins only) — for mobile/collection businesses that visit the customer rather than the customer visiting a shop. Not shown or editable by non-admin team members.
    - Notes (optional)
 3. Save
 
@@ -71,6 +72,7 @@ Click any visit on the calendar to see its details:
 - Notes
 - **Edit** button to change details
 - **Delete** button to remove the visit
+- **Convert to Booking** button (admin) — turns a standalone scheduler visit into a full Booking, which then appears in **Bookings -> Incoming**. Useful when a visit that was only ever booked as an appointment turns out to need the full repair workflow (tasks, notes, invoicing). The visit's reference carries over to the new booking.
 
 ---
 
