@@ -20,14 +20,16 @@ class Tenant extends Model
         'plan_limits',
         'billing_period_start',
         'active',
+        'sso_company_id',
+        'crm_company_slug',
     ];
 
     protected function casts(): array
     {
         return [
-            'plan_limits'          => 'array',
+            'plan_limits' => 'array',
             'billing_period_start' => 'date',
-            'active'               => 'boolean',
+            'active' => 'boolean',
         ];
     }
 

@@ -17,45 +17,53 @@ class ProvisioningController extends Controller
     public function store(Request $request): JsonResponse
     {
         $validated = $request->validate([
-            'slug'                         => ['required', 'string', 'max:63', 'unique:tenants,slug'],
-            'name'                         => ['required', 'string', 'max:255'],
-            'tier'                         => ['required', Rule::in(['free', 'starter', 'pro'])],
-            'plan_limits'                  => ['sometimes', 'array'],
-            'plan_limits.tickets_per_month'        => ['sometimes', 'integer', 'min:0'],
-            'plan_limits.chat_sessions_per_month'  => ['sometimes', 'integer', 'min:0'],
+            'slug' => ['required', 'string', 'max:63', 'unique:tenants,slug'],
+            'name' => ['required', 'string', 'max:255'],
+            'tier' => ['required', Rule::in(['free', 'starter', 'pro'])],
+            'plan_limits' => ['sometimes', 'array'],
+            'plan_limits.tickets_per_month' => ['sometimes', 'integer', 'min:0'],
+            'plan_limits.chat_sessions_per_month' => ['sometimes', 'integer', 'min:0'],
             'plan_limits.remote_minutes_per_month' => ['sometimes', 'integer', 'min:0'],
-            'plan_limits.agents_allowed'           => ['sometimes', 'integer', 'min:0'],
+            'plan_limits.agents_allowed' => ['sometimes', 'integer', 'min:0'],
+            // Optional -- Panel may not always have both at provisioning time.
+            // sso_company_id resolves tenant_admin SSO logins; crm_company_slug is
+            // used for the customer OTP relay to inteteam_crm. See
+            // inteteam-support/docs/features/customer-otp-login/README.md.
+            'sso_company_id' => ['sometimes', 'nullable', 'string', 'max:255', 'unique:tenants,sso_company_id'],
+            'crm_company_slug' => ['sometimes', 'nullable', 'string', 'max:255'],
         ]);
 
         $defaults = match ($validated['tier']) {
-            'free'    => ['tickets_per_month' => 20,  'chat_sessions_per_month' => 0,   'remote_minutes_per_month' => 0,   'agents_allowed' => 0],
+            'free' => ['tickets_per_month' => 20,  'chat_sessions_per_month' => 0,   'remote_minutes_per_month' => 0,   'agents_allowed' => 0],
             'starter' => ['tickets_per_month' => 100, 'chat_sessions_per_month' => 50,  'remote_minutes_per_month' => 0,   'agents_allowed' => 1],
-            'pro'     => ['tickets_per_month' => 0,   'chat_sessions_per_month' => 0,   'remote_minutes_per_month' => 300, 'agents_allowed' => 5],
-            default   => [],
+            'pro' => ['tickets_per_month' => 0,   'chat_sessions_per_month' => 0,   'remote_minutes_per_month' => 300, 'agents_allowed' => 5],
+            default => [],
         };
 
         $planLimits = array_merge($defaults, $validated['plan_limits'] ?? []);
 
         $tenant = DB::transaction(function () use ($validated, $planLimits): Tenant {
             $tenant = Tenant::create([
-                'slug'        => $validated['slug'],
-                'name'        => $validated['name'],
-                'tier'        => $validated['tier'],
+                'slug' => $validated['slug'],
+                'name' => $validated['name'],
+                'tier' => $validated['tier'],
                 'plan_limits' => $planLimits,
+                'sso_company_id' => $validated['sso_company_id'] ?? null,
+                'crm_company_slug' => $validated['crm_company_slug'] ?? null,
             ]);
 
             // Default customer group
             CustomerGroup::create([
                 'tenant_id' => $tenant->id,
-                'name'      => 'Default',
-                'features'  => ['tickets' => true, 'chat' => false, 'remote' => false],
+                'name' => 'Default',
+                'features' => ['tickets' => true, 'chat' => false, 'remote' => false],
             ]);
 
             return $tenant;
         });
 
         return response()->json([
-            'id'   => $tenant->id,
+            'id' => $tenant->id,
             'slug' => $tenant->slug,
             'name' => $tenant->name,
         ], 201);
@@ -66,12 +74,12 @@ class ProvisioningController extends Controller
         $tenant = Tenant::where('slug', $slug)->firstOrFail();
 
         return response()->json([
-            'id'          => $tenant->id,
-            'slug'        => $tenant->slug,
-            'name'        => $tenant->name,
-            'tier'        => $tenant->tier,
+            'id' => $tenant->id,
+            'slug' => $tenant->slug,
+            'name' => $tenant->name,
+            'tier' => $tenant->tier,
             'plan_limits' => $tenant->plan_limits,
-            'active'      => $tenant->active,
+            'active' => $tenant->active,
         ]);
     }
 

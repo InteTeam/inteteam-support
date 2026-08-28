@@ -10,24 +10,28 @@ use RuntimeException;
 class SsoService
 {
     private readonly string $ssoUrl;
+
     private readonly string $ssoInternalUrl;
+
     private readonly string $clientId;
+
     private readonly string $clientSecret;
+
     private readonly string $redirectUri;
 
     public function __construct()
     {
-        $this->ssoUrl         = config('sso.url');
+        $this->ssoUrl = config('sso.url');
         $this->ssoInternalUrl = config('sso.internal_url');
-        $this->clientId       = config('sso.client_id');
-        $this->clientSecret   = config('sso.client_secret');
-        $this->redirectUri    = config('sso.redirect_uri');
+        $this->clientId = config('sso.client_id');
+        $this->clientSecret = config('sso.client_secret');
+        $this->redirectUri = config('sso.redirect_uri');
     }
 
     /** @return array{verifier: string, challenge: string} */
     public function generatePkce(): array
     {
-        $verifier  = rtrim(strtr(base64_encode(random_bytes(64)), '+/', '-_'), '=');
+        $verifier = rtrim(strtr(base64_encode(random_bytes(64)), '+/', '-_'), '=');
         $challenge = rtrim(strtr(base64_encode(hash('sha256', $verifier, true)), '+/', '-_'), '=');
 
         return ['verifier' => $verifier, 'challenge' => $challenge];
@@ -36,12 +40,12 @@ class SsoService
     public function buildAuthorizationUrl(string $codeChallenge, string $state): string
     {
         return $this->ssoUrl . '/oauth/authorize?' . http_build_query([
-            'client_id'             => $this->clientId,
-            'redirect_uri'          => $this->redirectUri,
-            'response_type'         => 'code',
-            'scope'                 => '',
-            'state'                 => $state,
-            'code_challenge'        => $codeChallenge,
+            'client_id' => $this->clientId,
+            'redirect_uri' => $this->redirectUri,
+            'response_type' => 'code',
+            'scope' => '',
+            'state' => $state,
+            'code_challenge' => $codeChallenge,
             'code_challenge_method' => 'S256',
         ]);
     }
@@ -50,11 +54,11 @@ class SsoService
     public function exchangeCode(string $code, string $codeVerifier): array
     {
         $response = Http::asForm()->post($this->ssoInternalUrl . '/oauth/token', [
-            'grant_type'    => 'authorization_code',
-            'client_id'     => $this->clientId,
+            'grant_type' => 'authorization_code',
+            'client_id' => $this->clientId,
             'client_secret' => $this->clientSecret,
-            'redirect_uri'  => $this->redirectUri,
-            'code'          => $code,
+            'redirect_uri' => $this->redirectUri,
+            'code' => $code,
             'code_verifier' => $codeVerifier,
         ]);
 
@@ -65,7 +69,12 @@ class SsoService
         return $response->json();
     }
 
-    /** @return array{sub: string, email: string, name: string, role: string} */
+    /**
+     * company_id/company_name/subscriptions/sso_role/role are absent when the SSO
+     * user has no company context (e.g. a root admin) -- treat all as optional.
+     *
+     * @return array{sub: string, email: string, name: string, company_id?: string, company_name?: string, subscriptions?: array, sso_role?: string, role?: string}
+     */
     public function getUserInfo(string $accessToken): array
     {
         $response = Http::withToken($accessToken)->get($this->ssoInternalUrl . '/oauth/userinfo');
@@ -81,9 +90,9 @@ class SsoService
     public function refreshToken(string $refreshToken): array
     {
         $response = Http::asForm()->post($this->ssoInternalUrl . '/oauth/token', [
-            'grant_type'    => 'refresh_token',
+            'grant_type' => 'refresh_token',
             'refresh_token' => $refreshToken,
-            'client_id'     => $this->clientId,
+            'client_id' => $this->clientId,
             'client_secret' => $this->clientSecret,
         ]);
 

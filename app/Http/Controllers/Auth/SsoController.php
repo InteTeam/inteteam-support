@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\Tenant;
 use App\Models\User;
 use App\Services\SsoService;
 use Illuminate\Http\RedirectResponse;
@@ -25,7 +26,7 @@ class SsoController extends Controller
             abort(404);
         }
 
-        $pkce  = $this->ssoService->generatePkce();
+        $pkce = $this->ssoService->generatePkce();
         $state = Str::random(40);
 
         $request->session()->put('sso_code_verifier', $pkce['verifier']);
@@ -62,10 +63,17 @@ class SsoController extends Controller
                 ->withErrors(['sso' => 'SSO authentication failed. Please try again.']);
         }
 
-        $ssoRole = $claims['role'] ?? '';
+        // sso_role is inteteam_sso's platform-identity field (root/company_admin/user)
+        // -- NOT the same as a company-scoped "role" claim, and there never was an
+        // "inteteam_staff"/"tenant_admin"/"end_customer" claim value on the wire. See
+        // inte-playbook/architecture/sso-role-claims-and-support-auth.md. Also:
+        // inteteam_sso has no end-customer concept at all -- a tenant's own customers
+        // are never inteteam_sso users, so there is no third branch here. Customer
+        // login is email-OTP only, handled entirely by CustomerOtpController.
+        $ssoRole = $claims['sso_role'] ?? '';
 
-        // inteteam_staff → engineer dashboard
-        if ($ssoRole === 'inteteam_staff') {
+        // root → InteTeam's own staff, engineer dashboard. No tenant context needed.
+        if ($ssoRole === 'root') {
             $user = $this->findOrCreateUser($claims, 'engineer');
             Auth::login($user, false);
             $request->session()->regenerate();
@@ -75,42 +83,35 @@ class SsoController extends Controller
                 ->with(['alert' => 'Signed in via SSO.', 'type' => 'success']);
         }
 
-        // tenant_admin → tenant portal
-        if ($ssoRole === 'tenant_admin') {
+        // company_admin or plain user → tenant portal. Any company_user gets tenant
+        // portal access here; this app doesn't (yet) distinguish admin from member
+        // within a tenant company.
+        if ($ssoRole === 'company_admin' || $ssoRole === 'user') {
+            $ssoCompanyId = $claims['company_id'] ?? null;
+            $tenant = $ssoCompanyId ? Tenant::where('sso_company_id', $ssoCompanyId)->first() : null;
+
+            if (! $tenant) {
+                Log::warning('SSO callback: no Tenant found for sso_company_id', [
+                    'sso_company_id' => $ssoCompanyId,
+                    'email' => $claims['email'],
+                ]);
+
+                return redirect()->route('login')
+                    ->withErrors(['sso' => 'Your company is not yet set up on Inte.Team Support. Contact your administrator.']);
+            }
+
             $user = $this->findOrCreateUser($claims, 'tenant_admin');
             Auth::login($user, false);
             $request->session()->regenerate();
             $this->storeSsoTokens($request, $tokens);
-
-            $tenantId = $claims['tenant_id'] ?? null;
-            if ($tenantId) {
-                $request->session()->put('current_tenant_id', $tenantId);
-            }
+            $request->session()->put('current_tenant_id', $tenant->id);
 
             return redirect()->route('tenant.dashboard')
                 ->with(['alert' => 'Signed in via SSO.', 'type' => 'success']);
         }
 
-        // end_customer → customer view
-        if ($ssoRole === 'end_customer') {
-            $user = $this->findOrCreateUser($claims, 'end_customer');
-
-            // Persist tenant binding if SSO provides it
-            $tenantId = $claims['tenant_id'] ?? null;
-            if ($tenantId && $user->tenant_id !== $tenantId) {
-                $user->update(['tenant_id' => $tenantId]);
-            }
-
-            Auth::login($user, false);
-            $request->session()->regenerate();
-            $this->storeSsoTokens($request, $tokens);
-
-            return redirect()->route('customer.dashboard')
-                ->with(['alert' => 'Signed in via SSO.', 'type' => 'success']);
-        }
-
         return redirect()->route('login')
-            ->withErrors(['sso' => 'Unrecognised role: ' . $ssoRole]);
+            ->withErrors(['sso' => 'Unrecognised SSO role: ' . $ssoRole]);
     }
 
     /** @param array{access_token: string, refresh_token?: string, expires_in?: int} $tokens */

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Auth\CustomerOtpController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\SsoController;
 use App\Http\Controllers\Customer\ChatController as CustomerChatController;
@@ -25,6 +26,15 @@ Route::get('/', fn () => redirect()->route('login'));
 */
 Route::middleware('guest')->group(function () {
     Route::get('/login', [LoginController::class, 'create'])->name('login');
+
+    // Customer email-OTP login. Never via SSO claims -- inteteam_sso has no
+    // end-customer concept, see SsoController for the full explanation.
+    Route::post('/auth/customer/otp/request', [CustomerOtpController::class, 'requestOtp'])
+        ->middleware('throttle:5,1')
+        ->name('customer.otp.request');
+    Route::post('/auth/customer/otp/verify', [CustomerOtpController::class, 'verifyOtp'])
+        ->middleware('throttle:10,1')
+        ->name('customer.otp.verify');
 });
 
 Route::post('/logout', [LoginController::class, 'destroy'])

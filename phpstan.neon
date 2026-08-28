@@ -3,6 +3,14 @@ includes:
     - phpstan-baseline.neon
 
 parameters:
+    # phpstan-baseline.neon was copy-pasted from inteteam_crm's scaffold and still
+    # references files that only exist there (CompanyController, InventoryItem,
+    # etc.) -- without this, phpstan refuses to run at all. Found 2026-08-28
+    # while setting up this environment for unrelated SSO auth work; the baseline
+    # itself needs a proper regeneration against this repo's actual code, not
+    # attempted here (out of scope).
+    reportUnmatchedIgnoredErrors: false
+
     paths:
         - app
         - config

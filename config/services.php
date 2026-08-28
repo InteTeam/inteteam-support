@@ -35,4 +35,8 @@ return [
         ],
     ],
 
+    'inteteam_crm' => [
+        'url' => env('CRM_URL', ''),
+    ],
+
 ];

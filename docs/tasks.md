@@ -104,13 +104,17 @@ Read `docs/PRD.md` before starting any phase. Each phase must be fully complete 
 
 ---
 
-## Phase 5 — SSO Login Fix & Customer OTP Login (found 2026-08-28, not started)
+## Phase 5 — SSO Login Fix & Customer OTP Login (found + fixed 2026-08-28)
 
-SSO login is broken for every user — `inteteam_sso` never emits the `sso_role` claim this app's `SsoController::callback()` expects, and the `end_customer` branch can never legitimately fire via SSO at all (`inteteam_sso` has no end-customer concept). Full root cause + cross-app plan: `inte-playbook/architecture/sso-role-claims-and-support-auth.md`. Feature doc: `docs/features/customer-otp-login/README.md`.
+SSO login was broken for every user — `inteteam_sso` never emitted the `sso_role` claim this app's `SsoController::callback()` expects, and the `end_customer` branch could never legitimately fire via SSO at all (`inteteam_sso` has no end-customer concept). Full root cause + cross-app plan: `inte-playbook/architecture/sso-role-claims-and-support-auth.md`. Feature doc: `docs/features/customer-otp-login/README.md`.
 
-- [ ] Blocked on `inteteam_sso` shipping `sso_role` in claims (`inteteam_sso/docs/planning/sso-role-claims.md`)
-- [ ] `SsoController::callback()` — map `sso_role` → `inteteam_staff` (root) / `tenant_admin` (company_admin and plain user)
-- [ ] `SsoController::callback()` — remove the `end_customer` SSO branch (dead/unreachable code, misleading as-is)
-- [ ] New `CustomerOtpController` — request/verify against `inteteam_crm`'s existing `CustomerOtpService` API
-- [ ] Tests per `docs/features/customer-otp-login/README.md` acceptance criteria
-- [ ] Local admin/password login: decided against — SSO-only for staff/tenant_admin (matches PRD §11 "Auth: SSO throughout")
+- [x] `inteteam_sso` ships `sso_role` in claims (`inteteam_sso/docs/planning/sso-role-claims.md`)
+- [x] `SsoController::callback()` — maps `sso_role` → `engineer` (root) / `tenant_admin` (company_admin and plain user), resolving the tenant via the new `Tenant.sso_company_id` field (not the nonexistent `$claims['tenant_id']` the old code assumed)
+- [x] `SsoController::callback()` — `end_customer` SSO branch removed
+- [x] New `CustomerOtpController` + `CustomerOtpRelayService` — request/verify against `inteteam_crm`'s existing `CustomerOtpService` API, via the new `Tenant.crm_company_slug` field
+- [x] Tests per `docs/features/customer-otp-login/README.md` acceptance criteria — 13 passing (8 SSO, 5 OTP)
+- [x] Local admin/password login: decided against — SSO-only for staff/tenant_admin (matches PRD §11 "Auth: SSO throughout")
+- [ ] **Not deployable yet** — Panel provisioning doesn't populate `Tenant.sso_company_id`/`crm_company_slug` on any real tenant. No live tenant is actually linked to a CRM company. Separate, later work.
+- [ ] CRM "Open Support" widget (unchecked in Phase 1 above) still not built — it's the expected source of the `?tenant={slug}` link this feature's customer login depends on.
+
+**Also fixed along the way** (pre-existing environment/scaffold debt found while setting this repo up locally, unrelated to SSO): `composer.lock` missing `laravel/reverb` entirely; `config/reverb.php` stale relative to the installed Reverb version (blocked `artisan` completely); `remote_sessions` migration had a FK type mismatch (`ulid` columns referencing `users.id`, which is `bigint`) and had apparently never successfully run before; `phpstan-baseline.neon` was copy-pasted from `inteteam_crm` and referenced files that don't exist in this repo, blocking PHPStan entirely (`reportUnmatchedIgnoredErrors: false` added as a stopgap — the baseline itself still needs a real regeneration). Also found but **not** fixed (out of scope): `AgentRegistrationController` validates `customer_id` as `string` when `User.id` is `bigint` (Remote Desktop feature, Phase 3); 2 pre-existing ticket cross-tenant isolation test failures; `tests/Unit` directory referenced in `phpunit.xml` doesn't exist.
