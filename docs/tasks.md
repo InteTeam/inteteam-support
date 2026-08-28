@@ -101,3 +101,16 @@ Read `docs/PRD.md` before starting any phase. Each phase must be fully complete 
 - [x] Article suggestion in chat — surface relevant articles when session starts
 - [x] `kb_lookups` counter increments on every RAG query from inteteam-support
 - [x] Tenant can toggle KB suggestions on/off per customer group
+
+---
+
+## Phase 5 — SSO Login Fix & Customer OTP Login (found 2026-08-28, not started)
+
+SSO login is broken for every user — `inteteam_sso` never emits the `sso_role` claim this app's `SsoController::callback()` expects, and the `end_customer` branch can never legitimately fire via SSO at all (`inteteam_sso` has no end-customer concept). Full root cause + cross-app plan: `inte-playbook/architecture/sso-role-claims-and-support-auth.md`. Feature doc: `docs/features/customer-otp-login/README.md`.
+
+- [ ] Blocked on `inteteam_sso` shipping `sso_role` in claims (`inteteam_sso/docs/planning/sso-role-claims.md`)
+- [ ] `SsoController::callback()` — map `sso_role` → `inteteam_staff` (root) / `tenant_admin` (company_admin and plain user)
+- [ ] `SsoController::callback()` — remove the `end_customer` SSO branch (dead/unreachable code, misleading as-is)
+- [ ] New `CustomerOtpController` — request/verify against `inteteam_crm`'s existing `CustomerOtpService` API
+- [ ] Tests per `docs/features/customer-otp-login/README.md` acceptance criteria
+- [ ] Local admin/password login: decided against — SSO-only for staff/tenant_admin (matches PRD §11 "Auth: SSO throughout")

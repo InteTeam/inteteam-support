@@ -39,13 +39,16 @@ Dev URLs: http://localhost (app), http://localhost:5173 (Vite HMR)
 
 ## Architecture
 
-### User roles and routing (SSO → dashboard)
+### User roles and routing
 
-| SSO role | Redirects to |
-|---|---|
-| `inteteam_staff` | `/engineer/dashboard` |
-| `tenant_admin` | `/portal/dashboard` |
-| `end_customer` | `/support/dashboard` |
+SSO login is currently broken platform-wide (`sso_role` never reaches this app's claims) — see
+`docs/features/customer-otp-login/README.md` and `inte-playbook/architecture/sso-role-claims-and-support-auth.md`.
+
+| Role | Auth method | Redirects to |
+|---|---|---|
+| `inteteam_staff` | SSO only | `/engineer/dashboard` |
+| `tenant_admin` | SSO only | `/portal/dashboard` |
+| `end_customer` | Email-OTP only (never SSO — `inteteam_sso` has no end-customer concept) | `/support/dashboard` |
 
 ### Multi-tenancy
 
