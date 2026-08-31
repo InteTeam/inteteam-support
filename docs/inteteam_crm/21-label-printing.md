@@ -96,6 +96,29 @@ These field/style settings apply to all presets unless a specific preset has its
 
 ---
 
+## Custom Label Layouts (Grid Designer)
+
+For more control than the standard 4-field layout, each label preset can switch to a **custom grid layout** you design visually — useful for labels that need fields arranged side-by-side rather than stacked, or a mix of fixed text ("SALE", a brand name) alongside product data.
+
+### Designing a Layout
+
+1. Go to **Settings -> Printing -> Labels tab**
+2. Find the preset you want to customise and click the **grid icon** ("Design Layout") next to it
+3. Choose how many **rows** the label has, then how many **columns** each row has — rows can have different column counts (e.g. one wide row on top, two narrow columns below)
+4. On the canvas, **drag a field** from the field list at the top into any cell, or **type text directly** into a cell for fixed wording
+5. For each cell, set its **font size** and **text alignment** (left/center/right). A live hint under each cell estimates how many characters will fit at that size — if your text is longer, shrink the font or make the cell bigger (fewer columns/more rows)
+6. Click **Save Layout**
+
+Once saved, that preset always prints using this custom grid — the standard 4-field list is no longer used for it.
+
+**If this is your company's default preset:** saving a layout change asks you to confirm first, because it immediately changes what every automated and batch print produces — not just labels printed from the designer screen.
+
+**Switching back:** on the designer screen, click **Use simple list instead** to discard the custom grid and return the preset to the standard field-list style. This cannot be undone — you'd need to redesign the grid from scratch if you change your mind.
+
+A field bound to a cell that doesn't apply to a particular item (e.g. a "spec" field a product doesn't have) simply prints blank in that cell — it never blocks or breaks the print.
+
+---
+
 ## Requirements
 
 Label printing requires:
