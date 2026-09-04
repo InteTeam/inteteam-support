@@ -157,6 +157,8 @@ For Zebra printers, fine-tune how text and barcodes fit on the label if the defa
 
 Each field shows the auto-calculated default next to it, so you know what you're overriding and by how much.
 
+**Doesn't apply to Grid Designer presets.** If the selected preset uses a [Custom Label Layout](21-label-printing.md#custom-label-layouts-grid-designer), the Font Size / Barcode Height / Characters-per-line fields above are inert — the Calibration tab shows a warning and disables them. Grid layouts set font size per cell instead: open the preset's **Design Layout** screen, select the cell, and adjust its font size there.
+
 ---
 
 ## Windows USB Quick Setup Checklist

@@ -105,8 +105,8 @@ For more control than the standard 4-field layout, each label preset can switch 
 1. Go to **Settings -> Printing -> Labels tab**
 2. Find the preset you want to customise and click the **grid icon** ("Design Layout") next to it
 3. Choose how many **rows** the label has, then how many **columns** each row has — rows can have different column counts (e.g. one wide row on top, two narrow columns below)
-4. On the canvas, **drag a field** from the field list at the top into any cell, or **type text directly** into a cell for fixed wording
-5. For each cell, set its **font size** and **text alignment** (left/center/right). A live hint under each cell estimates how many characters will fit at that size — if your text is longer, shrink the font or make the cell bigger (fewer columns/more rows)
+4. On the canvas, **drag a field** from the field list at the top into any cell, **type text directly** into a cell for fixed wording, or drag the **Barcode** item in to place a real, resizable barcode graphic in that cell (drag its handle to set width/height — separate from any text field showing the barcode number)
+5. For each text cell, set its **font size** and **text alignment** (left/center/right). A live hint under each cell estimates how many characters will fit at that size — if your text is longer, shrink the font or make the cell bigger (fewer columns/more rows)
 6. Click **Save Layout**
 
 Once saved, that preset always prints using this custom grid — the standard 4-field list is no longer used for it.

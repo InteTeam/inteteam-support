@@ -30,6 +30,7 @@ Use the **search box** at the top to find products by name.
 | Field | Required | Description |
 |-------|----------|------------|
 | **Name** | Yes | Product name |
+| **Manufacturer / Artist** | No | e.g. a brand or artist name — also available as a field in the [Label Designer](21-label-printing.md#custom-label-layouts-grid-designer) and standard label content |
 | **Category** | No | Choose from your category tree |
 | **Price** | Yes | Sell price in GBP |
 | **Initial Quantity** | Yes | Starting stock level |
@@ -63,6 +64,8 @@ Add extra key/value data to a product beyond the standard fields (e.g. "Colour",
 5. Click the **remove** button on a row to delete it
 
 When editing a product, rows for any custom field already used elsewhere in your company appear automatically (blank, ready to fill in) alongside this product's existing values. Blank rows are dropped when you save — they don't create empty fields.
+
+Use the **up/down arrow buttons** on each custom field row to reorder them. This order is shared company-wide and saves immediately — it changes the row order on every product's Add/Edit form, not just the one you're currently editing. A newly-used field name appends to the end of the list until you manually reposition it.
 
 Custom fields are included as extra columns when you export products, and unmapped columns during import are saved as custom fields too (see [Importing Products](#importing-products)).
 
