@@ -39,4 +39,8 @@ return [
         'url' => env('CRM_URL', ''),
     ],
 
+    'panel' => [
+        'token' => env('PANEL_TOKEN'),
+    ],
+
 ];

@@ -18,7 +18,15 @@ WORKDIR /var/www
 
 RUN mkdir -p /var/log/php-fpm && chmod 777 /var/log/php-fpm
 
-RUN addgroup -g 1000 www && adduser -u 1000 -G www -s /bin/sh -D www
+# UID/GID must match the deploying SSH user on the target host (e.g. upanel=1002
+# on the Panel-managed hosts) since the repo is bind-mounted at runtime — files
+# on disk are owned by that user, not by whatever UID this image bakes in.
+# Defaults to 1000 for local dev. See inte-playbook's UID/GID deploy gotcha
+# (cms.inte.team, 2026-09-08).
+ARG UID=1000
+ARG GID=1000
+
+RUN addgroup -g ${GID} www && adduser -u ${UID} -G www -s /bin/sh -D www
 
 RUN chown -R www:www /var/www
 
