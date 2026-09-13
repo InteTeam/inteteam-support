@@ -25,7 +25,7 @@ class CustomerOtpController extends Controller
             'email' => ['required', 'email', 'max:255'],
         ]);
 
-        $tenant = Tenant::where('slug', $data['tenant'])->first();
+        $tenant = Tenant::findByLoginSlug($data['tenant']);
 
         if ($tenant) {
             $this->relay->requestOtp($tenant, $data['email']);
@@ -47,7 +47,7 @@ class CustomerOtpController extends Controller
             'code' => ['required', 'string', 'size:6', 'regex:/^[0-9]+$/'],
         ]);
 
-        $tenant = Tenant::where('slug', $data['tenant'])->first();
+        $tenant = Tenant::findByLoginSlug($data['tenant']);
 
         if (! $tenant) {
             return back()->withErrors(['otp' => 'Invalid or expired code.']);

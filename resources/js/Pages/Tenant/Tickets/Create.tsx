@@ -11,19 +11,30 @@ interface Usage {
     percent: number;
 }
 
-interface Props {
-    usage: Usage;
+interface Prefill {
+    app: string | null;
+    page: string | null;
 }
 
-export default function TenantTicketCreate({ usage }: Props) {
+interface Props {
+    usage: Usage;
+    prefill?: Prefill;
+}
+
+export default function TenantTicketCreate({ usage, prefill }: Props) {
     const errors = usePage<{ errors: Record<string, string> }>().props.errors;
 
     const form = useForm({
         category: 'other' as string,
         description: '',
-        app: '',
-        page: '',
+        app: prefill?.app ?? '',
+        page: prefill?.page ?? '',
     });
+
+    // Came in from the CRM "Open Support" widget -- expand the context
+    // section by default so the pre-filled values are visible, not hidden
+    // behind a collapsed <details>.
+    const hasPrefill = Boolean(prefill?.app || prefill?.page);
 
     const [kbArticles, setKbArticles]   = useState<KbArticle[]>([]);
     const [kbLoading, setKbLoading]     = useState(false);
@@ -112,7 +123,7 @@ export default function TenantTicketCreate({ usage }: Props) {
                     <KbSuggestions articles={kbArticles} loading={kbLoading} />
                 </div>
 
-                <details className="text-sm">
+                <details className="text-sm" open={hasPrefill}>
                     <summary className="text-gray-500 cursor-pointer">Context (optional)</summary>
                     <div className="mt-3 space-y-3">
                         <div>

@@ -70,6 +70,12 @@ class TicketController extends Controller
                 'limit'   => $tenant->getLimit('tickets_per_month'),
                 'percent' => $this->usage->getUsagePercent($tenant, 'tickets_per_month'),
             ],
+            // Pre-fills the optional Context fields when arriving from the
+            // CRM "Open Support" widget via SsoController's redirect.
+            'prefill' => [
+                'app'  => $request->query('app'),
+                'page' => $request->query('page'),
+            ],
         ]);
     }
 

@@ -47,6 +47,22 @@ it('relays the otp request to inteteam_crm using the tenant crm_company_slug', f
     });
 });
 
+it('also resolves the tenant when the CRM widget link uses crm_company_slug instead of the internal slug', function () {
+    config(['services.inteteam_crm.url' => 'http://crm.test']);
+    $tenant = makeOtpTenant();
+
+    Http::fake(['http://crm.test/*' => Http::response(['data' => ['message' => 'ok']])]);
+
+    // The "Open Support" widget only knows CRM's own company slug, not this
+    // app's internal (randomly-suffixed) Tenant.slug -- see Tenant::findByLoginSlug().
+    $this->post('/auth/customer/otp/request', [
+        'tenant' => $tenant->crm_company_slug,
+        'email' => 'customer@example.com',
+    ]);
+
+    Http::assertSent(fn ($request) => $request->url() === 'http://crm.test/api/v1/auth/customer/acme-repairs/otp/request');
+});
+
 // ---------------------------------------------------------------------------
 // Verify
 // ---------------------------------------------------------------------------

@@ -106,6 +106,17 @@ class SsoController extends Controller
             $this->storeSsoTokens($request, $tokens);
             $request->session()->put('current_tenant_id', $tenant->id);
 
+            // The CRM "Open Support" widget stashes app/page context on
+            // /login before kicking off this SSO round-trip (session survives
+            // it) -- land the user straight on a pre-filled ticket instead of
+            // the bare dashboard when it's present. `pull` so a later plain
+            // SSO login doesn't replay stale context.
+            $widgetContext = $request->session()->pull('support_widget_context');
+            if (is_array($widgetContext) && (! empty($widgetContext['app']) || ! empty($widgetContext['page']))) {
+                return redirect()->route('tenant.tickets.create', array_filter($widgetContext))
+                    ->with(['alert' => 'Signed in via SSO.', 'type' => 'success']);
+            }
+
             return redirect()->route('tenant.dashboard')
                 ->with(['alert' => 'Signed in via SSO.', 'type' => 'success']);
         }

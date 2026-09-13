@@ -142,6 +142,53 @@ it('rejects an unrecognised sso_role instead of treating it as end_customer', fu
 });
 
 // ---------------------------------------------------------------------------
+// CRM "Open Support" widget context (app/page stashed by LoginController)
+// ---------------------------------------------------------------------------
+
+it('redirects to a pre-filled new ticket when widget context was stashed in session', function () {
+    ssoTestConfig();
+    Tenant::factory()->create(['sso_company_id' => 'sso-company-3']);
+
+    fakeSsoTokenAndUserinfo([
+        'sub' => 'sso-id',
+        'email' => 'admin@widget.example',
+        'name' => 'Widget Admin',
+        'company_id' => 'sso-company-3',
+        'company_name' => 'Widget Co',
+        'sso_role' => 'company_admin',
+    ]);
+
+    $this->withSession([
+        'sso_state' => 'st',
+        'sso_code_verifier' => 'vrf',
+        'support_widget_context' => ['app' => 'inteteam_crm', 'page' => '/company/orders/123'],
+    ]);
+    $response = $this->get('/auth/sso/callback?code=code&state=st');
+
+    $response->assertRedirect(route('tenant.tickets.create', ['app' => 'inteteam_crm', 'page' => '/company/orders/123']));
+    $this->assertNull(session('support_widget_context'), 'widget context must be consumed, not replayed on a later login');
+});
+
+it('falls back to the plain dashboard when no widget context was stashed', function () {
+    ssoTestConfig();
+    Tenant::factory()->create(['sso_company_id' => 'sso-company-4']);
+
+    fakeSsoTokenAndUserinfo([
+        'sub' => 'sso-id',
+        'email' => 'admin@plain.example',
+        'name' => 'Plain Admin',
+        'company_id' => 'sso-company-4',
+        'company_name' => 'Plain Co',
+        'sso_role' => 'company_admin',
+    ]);
+
+    $this->withSession(['sso_state' => 'st', 'sso_code_verifier' => 'vrf']);
+    $response = $this->get('/auth/sso/callback?code=code&state=st');
+
+    $response->assertRedirect(route('tenant.dashboard'));
+});
+
+// ---------------------------------------------------------------------------
 // Existing behaviour preserved
 // ---------------------------------------------------------------------------
 

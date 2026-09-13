@@ -19,11 +19,26 @@ class LoginController extends Controller
         // to. There's no other way to identify the tenant pre-authentication
         // (no subdomain-per-tenant, no session) -- a link to /login?tenant=
         // {slug} is expected to come from the tenant's own CRM/portal (the
-        // still-unbuilt "Open Support" widget, see docs/tasks.md Phase 1).
-        // No tenant param -> no OTP option shown, staff/tenant_admin SSO
-        // login is unaffected either way.
+        // "Open Support" widget, see docs/tasks.md Phase 1). No tenant param
+        // -> no OTP option shown, staff/tenant_admin SSO login is unaffected
+        // either way. See Tenant::findByLoginSlug() for why this accepts
+        // both this app's own slug and CRM's crm_company_slug.
         $tenantSlug = $request->query('tenant');
-        $tenant = $tenantSlug ? Tenant::where('slug', $tenantSlug)->where('active', true)->first() : null;
+        $tenant = Tenant::findByLoginSlug($tenantSlug);
+
+        // The widget's SSO staff/tenant_admin user doesn't authenticate here
+        // at all (they go through /auth/sso/redirect, which doesn't take a
+        // tenant param -- their tenant is resolved from the SSO company_id
+        // claim). Stash the app/page context in session so SsoController can
+        // land them on a pre-filled ticket instead of the bare dashboard.
+        // Cleared by SsoController after use so a later plain SSO login
+        // (e.g. logging back in tomorrow) doesn't replay stale context.
+        if ($request->query('app') || $request->query('page')) {
+            $request->session()->put('support_widget_context', [
+                'app' => $request->query('app'),
+                'page' => $request->query('page'),
+            ]);
+        }
 
         return Inertia::render('Auth/Login', [
             'ssoEnabled' => config('sso.enabled'),

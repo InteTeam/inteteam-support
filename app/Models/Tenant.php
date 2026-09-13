@@ -47,4 +47,24 @@ class Tenant extends Model
     {
         return (int) ($this->plan_limits[$metric] ?? 0);
     }
+
+    /**
+     * Resolve an active Tenant from a `?tenant=` login-link value, which may
+     * be either this app's own `slug` or the CRM's `crm_company_slug`.
+     *
+     * The CRM's "Open Support" widget links here with its own company slug
+     * (already known to CRM, no new cross-app ID to sync) rather than this
+     * app's internal, randomly-suffixed `slug` (which CRM has no way to
+     * learn without a new sync point). See docs/tasks.md Phase 1.
+     */
+    public static function findByLoginSlug(?string $slug): ?self
+    {
+        if ($slug === null || $slug === '') {
+            return null;
+        }
+
+        return self::where('active', true)
+            ->where(fn ($query) => $query->where('slug', $slug)->orWhere('crm_company_slug', $slug))
+            ->first();
+    }
 }
