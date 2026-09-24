@@ -10,7 +10,7 @@ The **Print Label** button appears on these pages:
 
 | Page | What's printed on the label |
 |------|---------------------------|
-| **Booking detail** (`/admin/bookings/{id}`) | Booking reference (e.g. INT-001/03-2026) |
+| **Booking detail** (`/admin/bookings/{id}`) — **Label** button | A **booking label**: QR code or barcode plus the booking reference (e.g. `1234/09-2026`). Has its own settings — see [Booking Labels](#booking-labels-qr-code-or-barcode) |
 | **Storefront order** (`/admin/storefront/orders/{id}`) | Order reference |
 | **Part detail** (`/inventory/parts-stock/parts/{id}`) | Part MPN (manufacturer part number) |
 | **Inventory item** (`/warehouse/inventory/{id}`) | Item SKU |
@@ -25,7 +25,9 @@ If your company has **no label presets** configured, printing is still one click
 2. Click the **Print Label** button (printer icon)
 3. The CRM creates a print job and sends it to your default printer
 
-If your company **has label presets** set up (see [Printer Setup](22-printer-setup.md)), clicking Print Label opens a **print dialog** instead:
+**Booking labels are different:** the **Label** button on a booking prints straight away (no dialog) using the booking label settings described below.
+
+For orders, parts and inventory items: if your company **has label presets** set up (see [Printer Setup](22-printer-setup.md)), clicking Print Label opens a **print dialog** instead:
 
 1. Click the **Print Label** button
 2. If you have more than one preset, choose the **Label Preset** from the dropdown — its dimensions (e.g. 76x51mm) are shown next to the name
@@ -96,6 +98,33 @@ These field/style settings apply to all presets unless a specific preset has its
 
 ---
 
+## Booking Labels (QR Code or Barcode)
+
+The label printed from a booking's page (the **Label** button) is stuck on the customer's device. It has **its own settings**, separate from product labels and label presets — changing one never changes the other.
+
+**Where:** Settings -> Printing -> **Labels** tab -> **Booking Labels** card (admins only).
+
+| Setting | Options |
+|---|---|
+| **Code** | **QR code** (scans with any phone camera — recommended) or **Barcode** (for shops using 1D barcode scanners) |
+| **Label size** | **Printer's roll** (whatever roll the printer has loaded — each printer can differ, e.g. at drop-off points), **Same as label preset** (your default preset's size and calibration), or **Fixed size** (width × height in mm) |
+| **Text size** | **Automatic** (the booking number as large as the label allows) or a fixed size (8–36 pt) |
+| **Print the booking date** | On/off |
+
+A **live preview** shows exactly what will print (sample booking number, today's date), and **Test print** sends one to your default printer before you save.
+
+**Layout:** QR on the left, booking number on the right. Long references are split over lines rather than shrunk to nothing — e.g. `EDN-1234/09-2026` prints as `EDN-` / `1234/` / `09-2026`, with the number itself largest. The reference is **never cut short**.
+
+**Defaults:** companies created after this feature start on **QR code, printer's roll**. Companies that already existed kept their previous barcode label until an admin changes the setting.
+
+**"Doesn't fit" messages:** saving is refused if the booking number wouldn't fit at the chosen text size on any of your active printers — the message says the largest size that fits (e.g. *"The largest size that fits on Front desk Zebra (50×25 mm) is 22 pt."*). When printing, a label that can't be printed legibly is refused with a message instead of printing a cut-off or unscannable label. Common fixes: switch Text size to Automatic, use QR instead of Barcode (a barcode can't be split over lines, so long references with a location prefix don't fit on a 50 mm label as a barcode), or use a larger roll.
+
+**Who can print a booking label:** admins/staff for any booking; technicians only for bookings assigned to them; drop-off staff only for bookings at their own drop-off point.
+
+**What the QR contains:** a link to the booking in the CRM (no customer details). Scanning it opens the booking for whoever scans it, according to their role — see [Scanning Barcodes](20-barcode-scanning.md).
+
+---
+
 ## Custom Label Layouts (Grid Designer)
 
 For more control than the standard 4-field layout, each label preset can switch to a **custom grid layout** you design visually — useful for labels that need fields arranged side-by-side rather than stacked, or a mix of fixed text ("SALE", a brand name) alongside product data.
@@ -111,7 +140,7 @@ For more control than the standard 4-field layout, each label preset can switch 
 
 Once saved, that preset always prints using this custom grid — the standard 4-field list is no longer used for it.
 
-**If this is your company's default preset:** saving a layout change asks you to confirm first, because it immediately changes what every automated and batch print produces — not just labels printed from the designer screen.
+**If this is your company's default preset:** saving a layout change asks you to confirm first, because it immediately changes what every automated and batch print produces — not just labels printed from the designer screen. (Booking labels are not affected — they have their own settings.)
 
 **Switching back:** on the designer screen, click **Use simple list instead** to discard the custom grid and return the preset to the standard field-list style. This cannot be undone — you'd need to redesign the grid from scratch if you change your mind.
 

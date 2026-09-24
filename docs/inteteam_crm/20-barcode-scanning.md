@@ -19,7 +19,7 @@ Scan a barcode label on a device or item and jump straight to its page in the CR
 - On desktops/laptops, any available camera works
 - The app needs **camera permission** — your browser will ask the first time
 - Works in the **PWA** (installed app) on both Android and iOS
-- Supported barcode types: CODE_128, EAN_13, CODE_39
+- Supported barcode types: CODE_128, EAN_13, CODE_39 and **QR codes** (booking QR labels)
 
 ---
 
@@ -49,13 +49,23 @@ When you scan a barcode, the system searches in this order (first match wins):
 
 | Priority | What it checks | Where it takes you |
 |----------|---------------|-------------------|
+| 0 | Booking QR label (a link to this CRM) | Booking detail page |
 | 1 | Booking reference | Booking detail page |
 | 2 | Booking temp reference | Booking detail page |
 | 3 | Storefront order reference | Order detail page |
 | 4 | Part MPN | Part detail page |
 | 5 | Inventory item SKU | Inventory item page |
 
-If the barcode doesn't match any of these, you'll see a "No matching item found" message.
+If the barcode doesn't match any of these, you'll see a "No matching item found" message. QR codes that link to **other websites** never match anything. A booking QR label from a different company is treated as "not found".
+
+### Scanning a booking QR label with your phone's own camera
+
+Booking QR labels contain a link, so your phone's normal camera app can open them without opening the CRM first. You'll be asked to log in if you aren't, then taken to the right place for your role:
+
+- **Admins / staff:** the booking page
+- **Technicians:** the booking, if it's assigned to you — otherwise a "Not assigned to you" page
+- **Drop-off staff:** the Receive page with that customer's booking ready to confirm — or a "Not waiting at your drop-off point" page if it isn't an incoming booking at your point
+- **If the booking belongs to another company you're a member of:** a page asking whether to switch to that company (the CRM never switches company without asking)
 
 ---
 
@@ -66,6 +76,8 @@ Team members (technicians) can scan barcodes using the same camera and physical 
 - **Assigned to the booking:** You're taken to the booking page with a **Mark as Received** button. Tapping it logs a receipt confirmation in the audit trail (no status change — your shop's custom statuses are unaffected).
 - **Not assigned:** A message appears: *"You're not assigned to this booking. Contact your team lead if you think that's a mistake."*
 - **Non-booking items** (orders, parts, inventory): Team members see *"You don't have access to this item."*
+
+**Picking up from a drop-off point (Pickup page):** scan either the **pre-printed label** or the **booking QR label** on the device. The booking must be assigned to you and in the Undergoing stage; a booking QR only works for bookings that were handed in at a drop-off point.
 
 ### Mark as Received
 

@@ -35,7 +35,10 @@ When a customer arrives with a device, they should have a **confirmation email w
 1. Go to **Receive** (from the navbar or dashboard button)
 2. Ask the customer to show their confirmation email barcode
 3. Scan the barcode — the system identifies their booking
-4. Take a pre-printed label and stick it on the device
+4. Label the device — whichever applies:
+   - **Your screen shows "Print booking label & receive"** (your drop-off point has a label printer): click it. The booking label prints and the device is received in one step — stick the label on and you're done (skip the steps below). If the label can't print, nothing is changed and a message explains why.
+   - **The device already has its booking QR label:** scan that QR in the label box — it receives the booking. Scanning a *different* booking's QR is refused.
+   - Otherwise, take a pre-printed label and stick it on the device
 5. Scan the label using one of three methods:
    - Click the **barcode icon** next to the input field to open the camera scanner
    - Use a **USB barcode scanner** (keyboard-wedge) — it types the code and submits automatically when the input is focused
@@ -43,6 +46,8 @@ When a customer arrives with a device, they should have a **confirmation email w
 4. Press **Link** — the system links the label to the booking and moves it to Undergoing
 5. You'll see a green confirmation message
 6. Your admin receives a notification, and if enabled, the customer receives a confirmation email
+
+**Opening Receive from a scanned QR:** if you scan a booking QR label with your phone camera or the scanner icon, Receive opens with that customer's booking already filled in — you still confirm the name before continuing.
 
 ### If you make a mistake
 
