@@ -55,6 +55,7 @@ User-facing documentation for the InteTeam CRM Admin role. Admins have full acce
 - [63 - Email](63-email.md) — Email notifications
 - [64 - Support Tickets](64-support-tickets.md) — Customer portal support tickets
 - [65 - Voice Calling](65-voice-calling.md) — Twilio phone calls
+- [66 - Website Chat](66-website-chat.md) — Chat button for your own website
 
 ### 8. Invoicing & Payments
 - [70 - Invoicing](70-invoicing.md) — Create, send, void, credit notes
