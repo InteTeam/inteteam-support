@@ -30,6 +30,10 @@ If you have multiple locations, use the **location dropdown** to switch between 
 
 Click the **eye icon** to hide/show customer surnames on the calendar (useful when screen-sharing or when the screen is visible to other customers).
 
+### Visit Type Colours
+
+Visit cards can show a coloured stripe for their visit type, with a legend and a visit type filter. See [Visit Type Colours](53-visit-type-colours.md).
+
 ---
 
 ## Creating a Visit
