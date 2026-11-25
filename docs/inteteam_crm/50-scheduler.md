@@ -36,14 +36,13 @@ Click the **eye icon** to hide/show customer surnames on the calendar (useful wh
 
 1. Click on an **empty time slot** in the calendar, or click the **New Visit** button
 2. Fill in:
-   - Customer details
-   - Date and time (pre-filled if you clicked a slot)
-   - Visit type (one-time or recurring)
-   - Location
-   - Assigned agent
+   - Customer details: name, phone and email (optional)
+   - Start and end time (pre-filled if you clicked a slot)
    - **Service Address** (admins only) — for mobile/collection businesses that visit the customer rather than the customer visiting a shop. Not shown or editable by non-admin team members.
    - Notes (optional)
 3. Save
+
+The visit is booked at the location currently selected in the location dropdown. There is no visit type picker here: these visits have no type and show as **Appointment**. To choose a type (for example "Collection"), add the visit from the booking's **Visits** tab instead (see [Visit Types](52-visit-types.md)).
 
 The visit appears on the calendar with the customer name and a status badge.
 
