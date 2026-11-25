@@ -65,6 +65,14 @@ Internal notes visible only to your team:
 - Newest notes appear first
 - Notes include which stage the booking was in when the note was added
 
+**Links and dividers in notes**
+
+- Paste a web address that starts with `http://` or `https://` and it shows as a **clickable link**. Links open in a new tab. Addresses without `http` (for example `example.com`) stay as plain text, so paste the full address
+- To separate parts of a long note, put a line with only three dashes: `---`. It shows as a dashed divider line
+- Line breaks you type are kept as you typed them
+- Notes are plain text: there is no bold, colour or other formatting
+- This works the same on the admin booking page and on the booking page in the team app
+
 ### Costs Tab
 
 Financial overview for this booking — costs, charges, and totals.
