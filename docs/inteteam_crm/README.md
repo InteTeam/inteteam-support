@@ -46,6 +46,7 @@ User-facing documentation for the InteTeam CRM Admin role. Admins have full acce
 ### 6. Scheduling
 - [50 - Calendar & Appointments](50-scheduler.md) — Calendar views, visits
 - [51 - Scheduler Settings](51-scheduler-settings.md) — Locations, hours, holidays
+- [52 - Visit Types](52-visit-types.md) — Your own visit types (Drop off, Collection…), editing a visit
 
 ### 7. Communication
 - [60 - Conversations](60-conversations.md) — Unified inbox (WhatsApp, SMS, Tickets)

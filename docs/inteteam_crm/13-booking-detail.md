@@ -38,10 +38,27 @@ Customer contact details:
 
 Scheduled appointments linked to this booking:
 
-- Each visit shows: visit number, type (one-time/recurring), status, date, time, location, assigned agent
-- Click **Add Visit** to schedule a new appointment
+- Each visit shows: visit number, visit type, status, date, time, location, assigned agent and description
+- Click **Add Visit** to schedule a new appointment. The **Visit Type** dropdown offers your company's own visit types, or the built-in list if you haven't set any up (see [Visit Types](52-visit-types.md))
 - Set the **start time** and the **end time** auto-fills using the location's default appointment length — or click a **30 / 60 / 90 / 120 min** preset button to set the duration directly. Editing the end time by hand stops the auto-fill until you change the start time, location, or a preset again
 - If the slot falls outside business hours or is otherwise unavailable, you'll get a validation error with an option to override it
+
+#### Editing a Visit
+
+Made a mistake? Each visit that isn't cancelled has an **Edit** button. **Edit visit** lets you change:
+
+- **Visit Type**: your company's current list, plus the visit's own type (marked "(current)"), so an old or removed type can be kept while you fix something else
+- **Status**: **Booked** (not happened yet), **Confirmed** (customer arrived / visit done) or **No-show**. Setting Confirmed works the same as confirming the visit in the Scheduler
+- **Assigned to**: a member of your team, or **Nobody**
+- **Description**
+
+What you can't change here:
+
+- **Date and time**: use **Reschedule** in the Scheduler, which checks availability and can tell the customer
+- **Cancelling**: use **Cancel** in the Scheduler, which can tell the customer
+- **Location**
+
+Every change is recorded in the booking's **History** tab as **Visit Edited**, with the old and new values. A cancelled visit can't be edited.
 
 ### Tasks Tab
 
